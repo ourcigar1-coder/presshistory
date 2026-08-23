@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { PathList } from '@/components/PathList'
 import { entries } from '@/lib/content'
+import { getEntry } from '@/lib/content-source'
 
 export function generateStaticParams() {
   return Object.keys(entries).map((slug) => ({ slug }))
@@ -9,7 +10,7 @@ export function generateStaticParams() {
 
 export default async function EntryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const entry = entries[slug]
+  const entry = await getEntry(slug)
 
   if (!entry) notFound()
 

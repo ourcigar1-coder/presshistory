@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { techniques } from '@/lib/content'
+import { getTechnique } from '@/lib/content-source'
 
 export function generateStaticParams() {
   return Object.keys(techniques).map((slug) => ({ slug }))
@@ -9,7 +10,7 @@ export function generateStaticParams() {
 
 export default async function TechniquePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const technique = techniques[slug]
+  const technique = await getTechnique(slug)
 
   if (!technique) notFound()
 
@@ -20,9 +21,9 @@ export default async function TechniquePage({ params }: { params: Promise<{ slug
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--coral)]">How it works</p>
           <p className="mt-4 text-lg leading-8 text-[var(--muted)]">이 기법은 표면을 선택하고, 압력과 물질의 성질을 이용해 하나의 이미지를 여러 장으로 옮깁니다.</p>
-          <Link href={`/science/${technique.relatedScience[0].slug}`} className="mt-8 inline-flex border-b border-[var(--ink)] pb-1 text-sm font-bold hover:text-[var(--coral)]">
+          {technique.relatedScience[0] && <Link href={`/science/${technique.relatedScience[0].slug}`} className="mt-8 inline-flex border-b border-[var(--ink)] pb-1 text-sm font-bold hover:text-[var(--coral)]">
             {technique.relatedScience[0].title} 알아보기 →
-          </Link>
+          </Link>}
         </div>
         <div>
           <p className="mb-6 text-sm font-bold uppercase tracking-[0.15em] text-[var(--muted)]">Process</p>
