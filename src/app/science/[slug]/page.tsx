@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { techniques } from '@/lib/content'
+import { NodeTracker } from '@/components/NodeTracker'
 
 const concepts = {
   'contact-transfer': {
@@ -33,6 +34,7 @@ export default async function SciencePage({ params }: { params: Promise<{ slug: 
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={`science-${slug}`} type="science" title={concept.title} slug={slug} />
       <ContentHeader eyebrow="Science concept" title={concept.title} description={concept.description} />
       <section className="grid gap-12 py-14 lg:grid-cols-[0.7fr_1.3fr] lg:py-20">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--coral)]">Why it matters</p>

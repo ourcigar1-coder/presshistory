@@ -193,6 +193,30 @@ body {
 .lithography-mark { width: 52%; height: 42%; left: 24%; top: 29%; border: 6px solid var(--ink); transform: rotate(-8deg); }
 .lithography-ink { width: 34%; height: 28%; left: 33%; top: 36%; background: var(--coral); transform: rotate(8deg); mix-blend-mode: multiply; }
 
+.registration-stage {
+  position: relative;
+  display: grid;
+  min-height: 15rem;
+  place-items: center;
+  margin-top: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #d9d4c9;
+  background-image: linear-gradient(90deg, transparent 49.5%, rgba(32, 37, 34, 0.2) 50%, transparent 50.5%), linear-gradient(0deg, transparent 49.5%, rgba(32, 37, 34, 0.2) 50%, transparent 50.5%);
+  background-size: 3rem 3rem;
+}
+
+.registration-mark {
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border: 0.7rem solid;
+  border-radius: 999px;
+}
+
+.registration-blue { border-color: #477580; }
+.registration-red { border-color: var(--coral); transition: transform 160ms ease; }
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }

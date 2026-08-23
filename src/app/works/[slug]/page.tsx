@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { RelatedLinks } from '@/components/RelatedLinks'
 import { artworks } from '@/lib/content'
+import { NodeTracker } from '@/components/NodeTracker'
 
 export function generateStaticParams() {
   return Object.keys(artworks).map((slug) => ({ slug }))
@@ -15,6 +16,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={artwork._id} type="artwork" title={artwork.title} slug={artwork.slug} />
       <ContentHeader eyebrow={`Artwork / ${artwork.artist}`} title={artwork.title} description={artwork.shortDescription} />
       <section className="grid gap-8 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
         <div className="artwork-plate" role="img" aria-label={`${artwork.title} 작품을 위한 추상 이미지`}>

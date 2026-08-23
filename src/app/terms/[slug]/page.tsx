@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { RelatedLinks } from '@/components/RelatedLinks'
 import { techniques } from '@/lib/content'
+import { NodeTracker } from '@/components/NodeTracker'
 
 const terms = {
   lithography: { title: 'Lithography', description: '돌 위에 쓰는다는 뜻에서 출발한 평면 인쇄의 이름', originalLanguage: '그리스어 lithos + graphein', definition: '물과 기름이 서로 다른 표면을 선택한다는 성질을 이용하는 인쇄 기법' },
@@ -19,6 +20,7 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={`term-${slug}`} type="term" title={term.title} slug={slug} />
       <ContentHeader eyebrow="Term / language" title={term.title} description={term.description} />
       <section className="grid gap-12 py-14 lg:grid-cols-[0.7fr_1.3fr] lg:py-20">
         <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--coral)]">Where the name comes from</p><p className="mt-5 font-display text-3xl font-semibold leading-tight">{term.originalLanguage}</p></div>

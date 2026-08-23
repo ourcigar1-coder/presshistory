@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ContentHeader } from '@/components/ContentHeader'
 import { bridges } from '@/lib/content'
+import { NodeTracker } from '@/components/NodeTracker'
 
 export function generateStaticParams() { return Object.keys(bridges).map((slug) => ({ slug })) }
 
@@ -11,6 +12,7 @@ export default async function BridgePage({ params }: { params: Promise<{ slug: s
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={bridge._id} type="bridge" title={bridge.title} slug={bridge.slug} />
       <ContentHeader eyebrow={`Bridge / ${bridge.domain}`} title={bridge.title} description={bridge.shortDescription} />
       <section className="py-14 lg:py-20"><p className="max-w-2xl font-display text-4xl font-semibold leading-tight">{bridge.introQuestion}</p></section>
       <ol className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
