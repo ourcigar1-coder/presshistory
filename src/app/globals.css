@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4f0e8;
+  --paper-deep: #e8e1d5;
+  --ink: #202522;
+  --muted: #69716a;
+  --coral: #d9563f;
+  --line: rgba(32, 37, 34, 0.18);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.animate-rise {
+  animation: rise-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay {
+  animation: rise-in 700ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.print-field {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-width: 28rem;
+  margin-inline: auto;
+  border: 1px solid var(--line);
+  background-color: #d9d4c9;
+  background-image: radial-gradient(rgba(32, 37, 34, 0.18) 1px, transparent 1px);
+  background-size: 9px 9px;
+  overflow: hidden;
+  transform: rotate(3deg);
+}
+
+.print-ring,
+.print-line,
+.print-dot {
+  position: absolute;
+  display: block;
+}
+
+.print-ring {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.print-ring-one {
+  width: 74%;
+  aspect-ratio: 1;
+  left: 13%;
+  top: 13%;
+}
+
+.print-ring-two {
+  width: 48%;
+  aspect-ratio: 1;
+  left: 26%;
+  top: 26%;
+  border-color: var(--coral);
+  border-width: 9px;
+}
+
+.print-line {
+  width: 125%;
+  height: 2px;
+  left: -12%;
+  background: var(--ink);
+  transform: rotate(-38deg);
+}
+
+.print-line-one { top: 42%; }
+.print-line-two { top: 58%; background: var(--coral); transform: rotate(38deg); }
+
+.print-dot {
+  width: 14px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--coral);
+}
+
+.print-dot-one { left: 17%; top: 19%; }
+.print-dot-two { right: 13%; bottom: 18%; background: var(--ink); }
+
+.path-card {
+  display: grid;
+  min-height: 18rem;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 1.25rem;
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.path-card:hover {
+  background: var(--paper);
+  transform: translateY(-4px);
+}
+
+.path-number {
+  align-self: start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--coral);
+}
+
+.path-arrow {
+  font-size: 2rem;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.path-card:hover .path-arrow { transform: translate(4px, -4px); }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-rise-delay { animation: none; }
 }
