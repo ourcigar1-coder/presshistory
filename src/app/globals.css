@@ -167,6 +167,32 @@ body {
 .artwork-wave-two { bottom: 4%; transform: rotate(7deg); background: #477580; }
 .artwork-wave-three { bottom: -9%; transform: rotate(-2deg); background: #202f3d; }
 
+.lithography-stage {
+  display: grid;
+  min-height: 17rem;
+  place-items: center;
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #d9d4c9;
+  background-image: radial-gradient(rgba(32, 37, 34, 0.2) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.lithography-stone {
+  position: relative;
+  width: min(70vw, 19rem);
+  aspect-ratio: 1.4;
+  border: 1px solid rgba(32, 37, 34, 0.3);
+  background: #b8b5aa;
+  box-shadow: 0.75rem 0.75rem 0 rgba(32, 37, 34, 0.15);
+}
+
+.lithography-stone.has-water { background: #8baab0; }
+.lithography-mark, .lithography-ink { position: absolute; display: block; }
+.lithography-mark { width: 52%; height: 42%; left: 24%; top: 29%; border: 6px solid var(--ink); transform: rotate(-8deg); }
+.lithography-ink { width: 34%; height: 28%; left: 33%; top: 36%; background: var(--coral); transform: rotate(8deg); mix-blend-mode: multiply; }
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }

@@ -5,6 +5,7 @@ import { SideTrack } from '@/components/SideTrack'
 import { techniques } from '@/lib/content'
 import { getTechnique } from '@/lib/content-source'
 import { NodeTracker } from '@/components/NodeTracker'
+import { LithographyDiagram } from '@/components/LithographyDiagram'
 
 export function generateStaticParams() {
   return Object.keys(techniques).map((slug) => ({ slug }))
@@ -48,6 +49,7 @@ export default async function TechniquePage({ params }: { params: Promise<{ slug
           </ol>
         </div>
       </section>
+      {slug === 'lithography' && <LithographyDiagram />}
     </main>
   )
 }
