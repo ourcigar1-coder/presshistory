@@ -3,6 +3,7 @@ import { ContentHeader } from '@/components/ContentHeader'
 import { PathList } from '@/components/PathList'
 import { entries } from '@/lib/content'
 import { getEntry } from '@/lib/content-source'
+import { NodeTracker } from '@/components/NodeTracker'
 
 export function generateStaticParams() {
   return Object.keys(entries).map((slug) => ({ slug }))
@@ -16,6 +17,7 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={entry._id} type="entry" title={entry.title} slug={entry.slug} />
       <ContentHeader eyebrow={`Entry / ${entry.domain}`} title={entry.title} description={entry.shortDescription} />
       <section className="grid gap-12 py-14 lg:grid-cols-[0.7fr_1.3fr] lg:py-20">
         <div>

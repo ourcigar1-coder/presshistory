@@ -1,10 +1,12 @@
+import posthog from 'posthog-js';
+
 /**
  * Knowledge Tracking Utility
  * 
  * Exploration Depth: 익명 세션에서 방문한 고유 Knowledge Node 수
  */
 
-type NodeType = 'technique' | 'artwork' | 'story' | 'term' | 'science' | 'bridge';
+type NodeType = 'entry' | 'technique' | 'artwork' | 'story' | 'term' | 'science' | 'bridge';
 interface KnowledgeNode {
   id: string;
   type: NodeType;
@@ -23,6 +25,10 @@ interface TrackingSession {
 const SESSION_STORAGE_KEY = 'presshistory_tracking_session';
 const VISITED_NODES_KEY = 'presshistory_visited_nodes';
 const isBrowser = typeof window !== 'undefined';
+
+function capture(event: string, properties: Record<string, unknown>): void {
+  if (isBrowser && posthog.__loaded) posthog.capture(event, properties);
+}
 
 // Get unique visitor ID (anonymous)
 function getVisitorId(): string {
@@ -67,6 +73,14 @@ export function trackNodeView(node: KnowledgeNode): void {
     visited.push(node.id);
     localStorage.setItem(VISITED_NODES_KEY, JSON.stringify(visited));
   }
+
+  capture('knowledge_node_view', {
+    node_id: node.id,
+    node_type: node.type,
+    title: node.title,
+    slug: node.slug,
+    exploration_depth: visited.length,
+  });
 }
 
 // Get exploration depth (number of unique nodes visited)
@@ -99,6 +113,7 @@ export function trackEntryStart(entryType: 'time-journey' | 'object-journey'): v
     visitorId: getVisitorId(),
   };
   console.log('[Tracking] Entry Start:', event);
+  capture('entry_path_start', event);
 }
 
 // Record entry step
@@ -111,6 +126,7 @@ export function trackEntryStep(entryType: 'time-journey' | 'object-journey', ste
     visitorId: getVisitorId(),
   };
   console.log('[Tracking] Entry Step:', event);
+  capture('entry_path_step', event);
 }
 
 // Record search
@@ -122,6 +138,7 @@ export function trackSearch(query: string): void {
     visitorId: getVisitorId(),
   };
   console.log('[Tracking] Search:', event);
+  capture('search_performed', event);
 }
 
 // Record related content click
@@ -134,6 +151,7 @@ export function trackRelatedClick(sourceNode: KnowledgeNode, targetNode: Knowled
     visitorId: getVisitorId(),
   };
   console.log('[Tracking] Related Click:', event);
+  capture('related_content_click', event);
 }
 
 // Clear session (when user closes browser)

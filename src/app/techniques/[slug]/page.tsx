@@ -4,6 +4,7 @@ import { ContentHeader } from '@/components/ContentHeader'
 import { SideTrack } from '@/components/SideTrack'
 import { techniques } from '@/lib/content'
 import { getTechnique } from '@/lib/content-source'
+import { NodeTracker } from '@/components/NodeTracker'
 
 export function generateStaticParams() {
   return Object.keys(techniques).map((slug) => ({ slug }))
@@ -17,6 +18,7 @@ export default async function TechniquePage({ params }: { params: Promise<{ slug
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8 lg:px-10 lg:py-12">
+      <NodeTracker id={technique._id} type="technique" title={technique.title} slug={technique.slug} />
       <ContentHeader eyebrow={`Technique / ${technique.family}`} title={technique.title} description={technique.shortDescription} />
       <section className="grid gap-12 py-14 lg:grid-cols-[0.65fr_1.35fr] lg:py-20">
         <div>
