@@ -132,6 +132,41 @@ body {
 
 .path-card:hover .path-arrow { transform: translate(4px, -4px); }
 
+.artwork-plate {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #6b8f99;
+  background-image: linear-gradient(165deg, transparent 34%, rgba(244, 240, 232, 0.32) 35%, transparent 38%), radial-gradient(rgba(32, 37, 34, 0.18) 1px, transparent 1px);
+  background-size: auto, 8px 8px;
+}
+
+.artwork-sun {
+  position: absolute;
+  top: 12%;
+  right: 16%;
+  width: 18%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--coral);
+}
+
+.artwork-wave {
+  position: absolute;
+  left: -8%;
+  width: 116%;
+  height: 28%;
+  border: 3px solid var(--ink);
+  border-radius: 50% 50% 0 0;
+  background: #315d6b;
+  transform: rotate(-5deg);
+}
+
+.artwork-wave-one { bottom: 14%; }
+.artwork-wave-two { bottom: 4%; transform: rotate(7deg); background: #477580; }
+.artwork-wave-three { bottom: -9%; transform: rotate(-2deg); background: #202f3d; }
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
